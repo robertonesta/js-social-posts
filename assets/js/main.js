@@ -87,7 +87,7 @@ for (let i = 0; i < posts.length; i++) {
 const containerEl = document.getElementById("container")
 
 posts.forEach((post) => {
-    let profilePic = `<img class="profile-pic" src="${post.author.image}" alt="Phil Mangione">`
+    let profilePic = `<img class="profile-pic" src="${post.author.image}"takin>`
     let profilename = post.author.name;
     if (post.author.image == null) {
         profilePic = generateDefaultPropic(post.author.name)
