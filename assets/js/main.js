@@ -89,27 +89,25 @@ const containerEl = document.getElementById("container")
 posts.forEach((post) => {
     let profilePic = post.author.image;
     let profilename = post.author.name;
-    //let nameInitials;
-    //if (profilePic == null){
-       //profilePic = generateDefaultPropic(post.author.image)
-    //}
-
+    if (profilePic == null) {
+        profilePic = generateDefaultPropic(post.author.name)
+    }
     let time = post.created;
     let text = post.content;
     let picture = post.media;
     let number = post.id;
     let likes = post.likes;
 
-    containerEl.insertAdjacentElement("beforeend", generatePosts(profilePic, profilename, time, text, picture, number, likes)) 
+    containerEl.insertAdjacentHTML("beforeend", generatePosts(profilePic, profilename, time, text, picture, number, likes)) 
 })
 
 function generatePosts(propic, name, created, content, media, id, likes){
     const markup = `  
-        <!--<div class="post">
+        <div class="post">
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
-                            <img class="profile-pic" src="${propic}" alt="${name}">                    
+                            <img class="profile-pic" src="${propic}" alt="${propic}">                    
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">${name}</div>
@@ -134,7 +132,7 @@ function generatePosts(propic, name, created, content, media, id, likes){
                         </div>
                     </div> 
                 </div>            
-            </div> -->`
+            </div>`
             return markup;
 }
 
@@ -142,13 +140,15 @@ function generatePosts(propic, name, created, content, media, id, likes){
 // prendere dal ciclo forEach la variabile della foto profilo di default, portarla fuori dal ciclo per inserirla nella funzione sotto 
 
 
-/*function generateDefaultPropic (userName){
+function generateDefaultPropic (userName){
     const name = userName.split(" ");
     //console.log(name)
     let firstName = name[0];
     let lastName = name[1];
     const capitalizedfirstName = firstName.charAt(0)
     const capitalizedlastName = lastName.charAt(0)
-    let initials = `<div class=rounded>${capitalizedfirstName} ${capitalizedlastName}</div>`
+    let initials = `${capitalizedfirstName} ${capitalizedlastName}`
+    console.log(initials)
     return initials; 
-}*/
+}
+
