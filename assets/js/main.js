@@ -84,45 +84,53 @@ for (let i = 0; i < posts.length; i++) {
     //console.log(`created: ${post.created}`)
 }
 
-const postEl = document.querySelector(".post-list")
+const containerEl = document.getElementById("container")
+
 posts.forEach((post) => {
     let profilePic = post.author.image;
-    let nameInitials;
-    if (profilePic == null){
-        profilePic = nameInitials;
-    }
+    let profilename = post.author.name;
+    //let nameInitials;
+    //if (profilePic == null){
+       //profilePic = generateDefaultPropic(post.author.image)
+    //}
 
-    postEl.insertAdjacentElement("beforeend", generatePosts(profilePic)) 
+    let time = post.created;
+    let text = post.content;
+    let picture = post.media;
+    let number = post.id;
+    let likes = post.likes;
+
+    containerEl.insertAdjacentElement("beforeend", generatePosts(profilePic, profilename, time, text, picture, number, likes)) 
 })
 
-function generatePosts(propic){
+function generatePosts(propic, name, created, content, media, id, likes){
     const markup = `  
         <!--<div class="post">
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
-                            <img class="profile-pic" src="${propic}" alt="${post.name}">                    
+                            <img class="profile-pic" src="${propic}" alt="${name}">                    
                         </div>
                         <div class="post-meta__data">
-                            <div class="post-meta__author">${post.name}</div>
-                            <div class="post-meta__time">${post.created}</div>
+                            <div class="post-meta__author">${name}</div>
+                            <div class="post-meta__time">${created}</div>
                         </div>                    
                     </div>
                 </div>
-                <div class="post__text">${post.content}</div>
+                <div class="post__text">${content}</div>
                 <div class="post__image">
-                    <img src="${post.media}" alt="">
+                    <img src="${media}" alt="">
                 </div>
                 <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" href="#" data-postid="${id}">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
                         </div>
                         <div class="likes__counter">
-                            Piace a <b id="${post.id}" class="js-likes-counter">${post.likes}</b> persone
+                            Piace a <b id="${id}" class="js-likes-counter">${likes}</b> persone
                         </div>
                     </div> 
                 </div>            
@@ -130,3 +138,17 @@ function generatePosts(propic){
             return markup;
 }
 
+//funzione per mettere l'immagine di default con le iniziali del nome
+// prendere dal ciclo forEach la variabile della foto profilo di default, portarla fuori dal ciclo per inserirla nella funzione sotto 
+
+
+/*function generateDefaultPropic (userName){
+    const name = userName.split(" ");
+    //console.log(name)
+    let firstName = name[0];
+    let lastName = name[1];
+    const capitalizedfirstName = firstName.charAt(0)
+    const capitalizedlastName = lastName.charAt(0)
+    let initials = `<div class=rounded>${capitalizedfirstName} ${capitalizedlastName}</div>`
+    return initials; 
+}*/
