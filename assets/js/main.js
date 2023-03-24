@@ -87,9 +87,9 @@ for (let i = 0; i < posts.length; i++) {
 const containerEl = document.getElementById("container")
 
 posts.forEach((post) => {
-    let profilePic = post.author.image;
+    let profilePic = `<img class="profile-pic" src="${post.author.image}" alt="Phil Mangione">`
     let profilename = post.author.name;
-    if (profilePic == null) {
+    if (post.author.image == null) {
         profilePic = generateDefaultPropic(post.author.name)
     }
     let time = post.created;
@@ -107,7 +107,7 @@ function generatePosts(propic, name, created, content, media, id, likes){
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
-                            <img class="profile-pic" src="${propic}" alt="${propic}">                    
+                            ${propic}                    
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">${name}</div>
@@ -147,8 +147,10 @@ function generateDefaultPropic (userName){
     let lastName = name[1];
     const capitalizedfirstName = firstName.charAt(0)
     const capitalizedlastName = lastName.charAt(0)
-    let initials = `${capitalizedfirstName} ${capitalizedlastName}`
+    let initials = `<div class="profile-pic">${capitalizedfirstName} ${capitalizedlastName}</div>`
     console.log(initials)
     return initials; 
 }
+
+
 
